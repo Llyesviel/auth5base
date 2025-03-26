@@ -11,7 +11,7 @@
 
 1. Клонируйте репозиторий:
 ```
-git clone <ссылка на репозиторий>
+git clone https://github.com/Llyesviel/auth5base.git
 cd auth
 ```
 
@@ -22,7 +22,7 @@ npm install
 
 3. Создайте файл `.env` в корневой директории проекта со следующим содержимым:
 ```
-JWT_SECRET=ваш_секретный_ключ
+JWT_SECRET=56467901Amy
 ```
 
 ## Запуск сервера
