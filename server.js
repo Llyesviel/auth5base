@@ -6,16 +6,16 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 const app = express();
-const PORT = 3000;
+
+// Чтение порта из аргументов командной строки, переменной окружения или использование 3002 по умолчанию
+const cmdArgs = process.argv.slice(2);
+const cmdPort = cmdArgs.length > 0 ? parseInt(cmdArgs[0], 10) : null;
+const PORT = cmdPort || process.env.PORT || 3002;
 
 app.use(bodyParser.json());
 app.use(cors());
 
 let users = []; // "База данных" пользователей
-
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
 
 app.post('/register', (req, res) => {
     const { username, password } = req.body;
@@ -64,4 +64,8 @@ const authenticateJWT = (req, res, next) => {
 
 app.get('/protected', authenticateJWT, (req, res) => {
     res.json({ message: 'This is a protected route', user: req.user });
+});
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
